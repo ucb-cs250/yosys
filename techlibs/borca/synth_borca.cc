@@ -168,7 +168,7 @@ struct SynthBorcaPass : public ScriptPass
 			run("wreduce [-keepdc]");
 			run("peepopt");
 			run("opt_clean");
-      run("techmap -map +/techmap.v -map +/borca/arith_map.v");
+      run("techmap -map +/techmap.v -map +/borca/arith_map.v -D MAC_WIDTH=16");
       run("opt -fast");
 		}
 

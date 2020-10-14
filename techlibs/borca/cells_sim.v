@@ -137,3 +137,13 @@ module carry_chain # (
 
 endmodule
 
+module mac_block #(
+  parameter MIN_WIDTH = 8
+) (
+  input [MIN_WIDTH-1:0] A,
+  input [MIN_WIDTH-1:0] B,
+  output [4*MIN_WIDTH-1:0] C
+);
+
+endmodule
+
