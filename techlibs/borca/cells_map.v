@@ -27,37 +27,21 @@ module \$lut (A, Y);
 
   generate
     if (WIDTH == 1) begin
-      if (LUT == 2'b01) begin
-        INV _TECHMAP_REPLACE_ (.O(Y), .I(A[0]));
-      end else begin
-        LUT1 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
-          .I0(A[0]));
-      end
+      LUT4 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
+        .I0(A[0]), .I1(1'b0), .I2(1'b0), .I3(1'b0));
     end else
     if (WIDTH == 2) begin
-      LUT2 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
-        .I0(A[0]), .I1(A[1]));
+      LUT4 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
+        .I0(A[0]), .I1(A[1]), .I2(1'b0), .I3(1'b0));
     end else
     if (WIDTH == 3) begin
-      LUT3 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
-        .I0(A[0]), .I1(A[1]), .I2(A[2]));
+      LUT4 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
+        .I0(A[0]), .I1(A[1]), .I2(A[2]), .I3(A[3]));
     end else
     if (WIDTH == 4) begin
       LUT4 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
-        .I0(A[0]), .I1(A[1]), .I2(A[2]),
-        .I3(A[3]));
-    end else
-    if (WIDTH == 5) begin
-      LUT5 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
-        .I0(A[0]), .I1(A[1]), .I2(A[2]),
-        .I3(A[3]), .I4(A[4]));
-    end else
-    if (WIDTH == 6) begin
-      LUT6 #(.INIT(LUT)) _TECHMAP_REPLACE_ (.O(Y),
-        .I0(A[0]), .I1(A[1]), .I2(A[2]),
-        .I3(A[3]), .I4(A[4]), .I5(A[5]));
+        .I0(A[0]), .I1(A[1]), .I2(A[2]), .I3(A[3]));
     end else begin
-      // TODO: S44?
       wire _TECHMAP_FAIL_ = 1;
     end
   endgenerate
@@ -67,4 +51,3 @@ module  \$_DFF_P_ (input D, C, output Q);
    DFF _TECHMAP_REPLACE_
      (.q(Q), .d(D), .clk(C));
 endmodule
-

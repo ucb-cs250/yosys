@@ -51,7 +51,6 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 	(* force_downto *)
 	wire [Y_WIDTH-1:0] BB = BI ? ~B_buf : B_buf;
 
-  // TODO: check this logic
 	localparam CARRY4_COUNT = (Y_WIDTH + 3) / 4;
 	localparam MAX_WIDTH    = CARRY4_COUNT * 4;
 	localparam PAD_WIDTH    = MAX_WIDTH - Y_WIDTH;
@@ -59,12 +58,12 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 	(* force_downto *)
 	wire [MAX_WIDTH-1:0] S  = {{PAD_WIDTH{1'b0}}, AA ^ BB};
 	(* force_downto *)
-	wire [MAX_WIDTH-1:0] DI = {{PAD_WIDTH{1'b0}}, AA};
+	wire [MAX_WIDTH-1:0] DI = {{PAD_WIDTH{1'b0}}, AA & BB};
 
 	(* force_downto *)
 	wire [MAX_WIDTH-1:0] O;
 	(* force_downto *)
-	wire [MAX_WIDTH-1:0] C;
+	wire C;
 	assign Y = O, CO = C;
 
 	genvar i;
@@ -75,11 +74,11 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
-			  .Co (C [i*4 +: 4])
+			  .Co (C [i])
 			);
 		end else begin
 			carry_chain carry4 (
-			  .Ci (C [i*4 - 1]),
+			  .Ci (C [i-1]),
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
