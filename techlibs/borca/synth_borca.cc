@@ -76,7 +76,7 @@ struct SynthBorcaPass : public ScriptPass
 	bool flatten;
 	bool abc9;
 	bool flatten_before_abc;
-  int lut_size = 7;
+  int lut_size = 4;
 
 	void clear_flags() override
 	{
@@ -86,7 +86,7 @@ struct SynthBorcaPass : public ScriptPass
 		flatten = false;
 		abc9 = false;
 		flatten_before_abc = false;
-		lut_size = 7;
+		lut_size = 4;
 	}
 
 	void execute(std::vector<std::string> args, RTLIL::Design *design) override
@@ -145,7 +145,7 @@ struct SynthBorcaPass : public ScriptPass
 	{
 		std::string lut_size_s = std::to_string(lut_size);
 		if (help_mode)
-			lut_size_s = "[7]";
+			lut_size_s = "[4]";
 
 		if (check_label("begin")) {
 			std::string read_args;
