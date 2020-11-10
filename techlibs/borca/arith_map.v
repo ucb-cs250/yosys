@@ -37,7 +37,8 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 
 	input CI, BI;
 	(* force_downto *)
-	output [Y_WIDTH-1:0] CO;
+	//output [Y_WIDTH-1:0] CO;
+  output CO;
 
 	wire _TECHMAP_FAIL_ = Y_WIDTH <= 2;
 
@@ -63,8 +64,9 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 	(* force_downto *)
 	wire [MAX_WIDTH-1:0] O;
 	(* force_downto *)
-	wire C;
-	assign Y = O, CO = C;
+	//wire C;
+  wire [CARRY4_COUNT-1:0] C;
+	assign Y = O, CO = C[CARRY4_COUNT-1];
 
 	genvar i;
 	generate for (i = 0; i < CARRY4_COUNT; i = i + 1) begin:slice
@@ -82,7 +84,7 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
-			  .Co (C [i*4 +: 4])
+			  .Co (C [i])
 			);
 		end
 	end endgenerate
