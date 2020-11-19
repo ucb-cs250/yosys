@@ -47,7 +47,22 @@ module \$lut (A, Y);
   endgenerate
 endmodule
 
-module  \$_DFF_P_ (input D, C, output Q);
-   DFF _TECHMAP_REPLACE_
-     (.q(Q), .d(D), .clk(C));
+module  \$_DFF_P_ (input D, C, E, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(1'b1), .r(1'b0));
+endmodule
+
+module  \$_DFFE_PP_ (input D, C, E, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(1'b0));
+endmodule
+
+module  \$_SDFFE_PP0P_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(R));
+endmodule
+
+module  \$_SDFFE_PP1P_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b1;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(R));
 endmodule

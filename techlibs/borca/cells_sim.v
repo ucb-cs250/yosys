@@ -35,10 +35,14 @@ module LUT4(output O, input I0, I1, I2, I3);
 //  endspecify
 endmodule
 
-module DFF (output q, input  d, clk);
+module DFFER (output q, input  d, clk, e, r);
+  parameter INIT = 0;
   reg q;
   always @(posedge clk)
-    q <= d;
+    if (r)
+      q <= INIT;
+    else if (e)
+      q <= d;
 endmodule
 
 // From the CLB team
