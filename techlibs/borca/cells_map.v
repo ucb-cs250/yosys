@@ -17,6 +17,19 @@
  *
  */
 
+module  \$not (A, Y);
+  parameter A_WIDTH = 1;
+  parameter Y_WIDTH = 1;
+  parameter A_SIGNED = 0;
+
+  (* force_downto *)
+  input [A_WIDTH-1:0] A;
+  output [Y_WIDTH-1:0] Y;
+
+  LUT4 #(.INIT(16'h5555)) _TECHMAP_REPLACE_ (.O(Y),
+         .I0(A), .I1(1'b0), .I2(1'b0), .I3(1'b0));
+endmodule
+
 module \$lut (A, Y);
   parameter WIDTH = 0;
   parameter LUT = 0;
@@ -57,6 +70,11 @@ module  \$_DFFE_PP_ (input D, C, E, output Q);
   DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(1'b0));
 endmodule
 
+module  \$_DFFE_PN_ (input D, C, E, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(~E), .r(1'b0));
+endmodule
+
 module  \$_SDFFE_PP0P_ (input D, C, E, R, output Q);
   parameter INIT = 1'b0;
   DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(R));
@@ -65,4 +83,54 @@ endmodule
 module  \$_SDFFE_PP1P_ (input D, C, E, R, output Q);
   parameter INIT = 1'b1;
   DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(R));
+endmodule
+
+module  \$_SDFFE_PP0N_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(~E), .r(R));
+endmodule
+
+module  \$_SDFFE_PP1N_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b1;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(~E), .r(R));
+endmodule
+
+module  \$_SDFFE_PN0P_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(~R));
+endmodule
+
+module  \$_SDFFE_PN1P_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b1;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(E), .r(~R));
+endmodule
+
+module  \$_SDFFE_PN0N_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(~E), .r(~R));
+endmodule
+
+module  \$_SDFFE_PN1N_ (input D, C, E, R, output Q);
+  parameter INIT = 1'b1;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(~E), .r(~R));
+endmodule
+
+module  \$_SDFF_PP0_ (input D, C, R, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(1'b1), .r(R));
+endmodule
+
+module  \$_SDFF_PP1_ (input D, C, R, output Q);
+  parameter INIT = 1'b1;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(1'b1), .r(R));
+endmodule
+
+module  \$_SDFF_PN0_ (input D, C, R, output Q);
+  parameter INIT = 1'b0;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(1'b1), .r(~R));
+endmodule
+
+module  \$_SDFF_PN1_ (input D, C, R, output Q);
+  parameter INIT = 1'b1;
+  DFFER #(.INIT(INIT)) _TECHMAP_REPLACE_ (.d(D), .q(Q), .clk(C), .e(1'b1), .r(~R));
 endmodule
