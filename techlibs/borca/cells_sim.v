@@ -48,15 +48,15 @@ endmodule
 // From the CLB team
 // This is just a placeholder
 (* abc9_box, lib_whitebox *)
-module carry_chain # (
+module CARRY4 # (
   parameter INPUTS=4
 ) (
   (* abc9_carry *)
   input  [INPUTS-1:0] P,
   input  [INPUTS-1:0] G,
   output [INPUTS-1:0] S,
-  input  Ci,
-  output Co
+  input  CI,
+  output CO
 );
 
 endmodule

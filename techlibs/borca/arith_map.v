@@ -71,20 +71,20 @@ module _80_borca_alu (A, B, CI, BI, X, Y, CO);
 	genvar i;
 	generate for (i = 0; i < CARRY4_COUNT; i = i + 1) begin:slice
 		if (i == 0) begin
-			carry_chain carry4 (
-			  .Ci (1'd0),
+			CARRY4 carry4 (
+			  .CI (1'd0),
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
-			  .Co (C [i])
+			  .CO (C [i])
 			);
 		end else begin
-			carry_chain carry4 (
-			  .Ci (C [i-1]),
+			CARRY4 carry4 (
+			  .CI (C [i-1]),
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
-			  .Co (C [i])
+			  .CO (C [i])
 			);
 		end
 	end endgenerate
@@ -137,20 +137,20 @@ module wide_adder (A, B, BI, Y, CO);
 	genvar i;
 	generate for (i = 0; i < CARRY4_COUNT; i = i + 1) begin:slice
 		if (i == 0) begin
-			carry_chain carry4 (
-			  .Ci (1'd0),
+			CARRY4 carry4 (
+			  .CI (1'd0),
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
-			  .Co (C [i*4 +: 4])
+			  .CO (C [i*4 +: 4])
 			);
 		end else begin
-			carry_chain carry4 (
-			  .Ci (C [i*4 - 1]),
+			CARRY4 carry4 (
+			  .CI (C [i*4 - 1]),
 			  .G  (DI[i*4 +: 4]),
 			  .P  (S [i*4 +: 4]),
 			  .S  (O [i*4 +: 4]),
-			  .Co (C [i*4 +: 4])
+			  .CO (C [i*4 +: 4])
 			);
 		end
 	end endgenerate
